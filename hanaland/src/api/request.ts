@@ -79,7 +79,7 @@ export function createRequest(baseUrl: string) {
     const response = await api(resolvedUrl, requestOptions)
 
     if (!response.ok) {
-      const errorBody = await response.json().catch(() => ({ error: response.statusText }))
+      const errorBody = await response.json().catch(() => ({ error: response.statusText })) as Record<string, any>
       throw new RequestError(errorBody.error || `HTTP ${response.status}`, response.status, errorBody)
     }
 

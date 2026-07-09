@@ -33,14 +33,12 @@ export type HanalandOptions = {
 
 export class Hanaland {
   request: RequestFunction
-  rest: {
-    topics: ReturnType<typeof buildMethods>
-    users: ReturnType<typeof buildMethods>
-    nodes: ReturnType<typeof buildMethods>
-    replies: ReturnType<typeof buildMethods>
-    photos: ReturnType<typeof buildMethods>
-    notifications: ReturnType<typeof buildMethods>
-  }
+  topics: ReturnType<typeof buildMethods>
+  users: ReturnType<typeof buildMethods>
+  nodes: ReturnType<typeof buildMethods>
+  replies: ReturnType<typeof buildMethods>
+  photos: ReturnType<typeof buildMethods>
+  notifications: ReturnType<typeof buildMethods>
 
   private _ctx: { setAuth: (value: string | undefined) => void; request: RequestFunction }
 
@@ -51,14 +49,12 @@ export class Hanaland {
     if (auth) {
       this._ctx.setAuth(auth)
     }
-    this.rest = {
-      topics: buildMethods(topicsEndpoints, this.request),
-      users: buildMethods(usersEndpoints, this.request),
-      nodes: buildMethods(nodesEndpoints, this.request),
-      replies: buildMethods(repliesEndpoints, this.request),
-      photos: buildMethods(photosEndpoints, this.request),
-      notifications: buildMethods(notificationsEndpoints, this.request),
-    }
+    this.topics = buildMethods(topicsEndpoints, this.request)
+    this.users = buildMethods(usersEndpoints, this.request)
+    this.nodes = buildMethods(nodesEndpoints, this.request)
+    this.replies = buildMethods(repliesEndpoints, this.request)
+    this.photos = buildMethods(photosEndpoints, this.request)
+    this.notifications = buildMethods(notificationsEndpoints, this.request)
   }
 
   setToken(value: string) {
