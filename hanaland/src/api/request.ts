@@ -1,3 +1,5 @@
+import ky from 'ky'
+
 export class RequestError extends Error {
   status: number
   response: any
@@ -25,38 +27,40 @@ function interpolate(template: string, params: Record<string, any>): { url: stri
 }
 
 export function createRequest(baseUrl: string, auth?: string) {
+  const api = ky.create({
+    prefix: baseUrl,
+    throwHttpErrors: false,
+  })
+
   return async function request(
     route: string,
     options: Record<string, any> = {},
   ): Promise<any> {
-    const idx = route.indexOf(' ')
-    const method = route.slice(0, idx) as 'GET' | 'POST' | 'PUT' | 'DELETE'
-    const urlTemplate = route.slice(idx + 1)
+    const sep = route.indexOf(' ')
+    const method = route.slice(0, sep) as 'GET' | 'POST' | 'PUT' | 'DELETE'
+    const urlTemplate = route.slice(sep + 1)
 
     const { data, headers: extraHeaders, ...rest } = options
     const { url: resolvedUrl, query } = interpolate(urlTemplate, rest)
 
-    const apiUrl = new URL(resolvedUrl, baseUrl)
+    const searchParams: Record<string, string> = { ...query }
     if (auth) {
-      apiUrl.searchParams.set('access_token', auth)
-    }
-    for (const [key, value] of Object.entries(query)) {
-      if (value !== undefined && value !== null) {
-        apiUrl.searchParams.set(key, String(value))
-      }
+      searchParams.access_token = auth
     }
 
-    const headers: Record<string, string> = { ...extraHeaders }
-    let body: BodyInit | undefined
+    const requestOptions: Record<string, any> = {
+      method,
+      headers: { ...extraHeaders },
+      searchParams,
+    }
 
     if (data instanceof FormData) {
-      body = data
-    } else if (data) {
-      headers['Content-Type'] = 'application/json'
-      body = JSON.stringify(data)
+      requestOptions.body = data
+    } else if (data !== undefined) {
+      requestOptions.json = data
     }
 
-    const response = await fetch(apiUrl.toString(), { method, headers, body })
+    const response = await api(resolvedUrl, requestOptions)
 
     if (!response.ok) {
       const errorBody = await response.json().catch(() => ({ error: response.statusText }))
