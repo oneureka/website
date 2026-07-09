@@ -10,14 +10,18 @@
   },
   "dependencies": {
     "@splidejs/vue-splide": "^0.6.12",
+    "daisyui": "^5.6.16",
     "pinia": "^3.0.4",
     "vue": "^3.5.39",
+    "vue-i18n": "^11.4.6",
     "vue-router": "^5.1.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.3.2",
     "@types/node": "^24.13.2",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/tsconfig": "^0.9.1",
+    "tailwindcss": "^4.3.2",
     "typescript": "~6.0.2",
     "vite": "^8.1.1",
     "vue-tsc": "^3.3.5"
