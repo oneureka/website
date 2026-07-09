@@ -1,11 +1,11 @@
 {
   "name": "vite-project",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "license": "MS-PL",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {

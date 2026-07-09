@@ -8,6 +8,6 @@ export default createI18n({
   fallbackLocale: 'en',
   messages: {
     'zh-CN': zhCN,
-    en,
-  },
+    en
+  }
 })

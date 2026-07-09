@@ -1,11 +1,15 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="container mx-auto px-4 py-16 md:py-20">
     <div class="text-center mb-12">
-      <span class="inline-block text-xs tracking-[0.3em] text-base-content/40 mb-3">CONTACT</span>
-      <h1 class="text-3xl font-light tracking-wide text-base-content">联系我们</h1>
+      <span
+        class="inline-block text-xs tracking-[0.3em] text-base-content/40 mb-3"
+        >CONTACT</span
+      >
+      <h1 class="text-3xl font-light tracking-wide text-base-content">
+        联系我们
+      </h1>
       <div class="w-8 h-px bg-base-content/20 mx-auto mt-4" />
     </div>
 
@@ -40,7 +44,9 @@
               class="textarea textarea-bordered rounded-none text-sm h-32 border-base-200/60 focus:border-base-content/40 transition-colors"
             />
           </div>
-          <button class="btn btn-outline rounded-none text-sm tracking-wider px-10">
+          <button
+            class="btn btn-outline rounded-none text-sm tracking-wider px-10"
+          >
             发送
           </button>
         </form>
@@ -51,7 +57,9 @@
         <div class="space-y-6">
           <div class="flex items-start gap-4">
             <span class="text-xs text-base-content/40 min-w-[3em]">邮箱</span>
-            <span class="text-sm text-base-content/70">contact@oneureka.com</span>
+            <span class="text-sm text-base-content/70"
+              >contact@oneureka.com</span
+            >
           </div>
           <div class="flex items-start gap-4">
             <span class="text-xs text-base-content/40 min-w-[3em]">电话</span>
@@ -59,13 +67,17 @@
           </div>
           <div class="flex items-start gap-4">
             <span class="text-xs text-base-content/40 min-w-[3em]">地址</span>
-            <span class="text-sm text-base-content/70">中国某市某区某路 123 号</span>
+            <span class="text-sm text-base-content/70"
+              >中国某市某区某路 123 号</span
+            >
           </div>
         </div>
 
         <div class="mt-8">
           <h2 class="text-sm tracking-wide font-normal mb-4">位置</h2>
-          <div class="w-full aspect-[16/9] bg-base-200/50 flex items-center justify-center text-base-content/20 text-sm">
+          <div
+            class="w-full aspect-[16/9] bg-base-200/50 flex items-center justify-center text-base-content/20 text-sm"
+          >
             MAP
           </div>
         </div>

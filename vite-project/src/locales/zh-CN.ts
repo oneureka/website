@@ -5,6 +5,6 @@ export default {
     products: '产品展示',
     news: '新闻中心',
     contact: '联系我们',
-    jobs: '人才招聘',
-  },
+    jobs: '人才招聘'
+  }
 }
