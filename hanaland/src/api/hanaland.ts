@@ -1,4 +1,4 @@
-import { createRequest } from './request'
+import { createRequest, type RequestFunction } from './request'
 import topicsEndpoints from './endpoints/topics'
 import usersEndpoints from './endpoints/users'
 import nodesEndpoints from './endpoints/nodes'
@@ -14,7 +14,7 @@ type EndpointDef = {
 
 type EndpointsArray = readonly EndpointDef[]
 
-function buildMethods(endpoints: EndpointsArray, request: ReturnType<typeof createRequest>) {
+function buildMethods(endpoints: EndpointsArray, request: RequestFunction) {
   const methods: Record<string, Function> = {}
 
   for (const { id, method, url } of endpoints) {
@@ -32,7 +32,7 @@ export type HanalandOptions = {
 }
 
 export class Hanaland {
-  request: ReturnType<typeof createRequest>
+  request: RequestFunction
   rest: {
     topics: ReturnType<typeof buildMethods>
     users: ReturnType<typeof buildMethods>
@@ -42,13 +42,15 @@ export class Hanaland {
     notifications: ReturnType<typeof buildMethods>
   }
 
-  private _baseUrl: string
-  private _auth?: string
+  private _ctx: { setAuth: (value: string | undefined) => void; request: RequestFunction }
 
   constructor({ baseUrl, auth }: HanalandOptions = {}) {
-    this._baseUrl = baseUrl || import.meta.env.HANALAND_API_URL || ''
-    this._auth = auth
-    this.request = createRequest(this._baseUrl, this._auth)
+    const base = baseUrl || import.meta.env.HANALAND_API_URL || ''
+    this._ctx = createRequest(base)
+    this.request = this._ctx.request
+    if (auth) {
+      this._ctx.setAuth(auth)
+    }
     this.rest = {
       topics: buildMethods(topicsEndpoints, this.request),
       users: buildMethods(usersEndpoints, this.request),
@@ -60,12 +62,10 @@ export class Hanaland {
   }
 
   setToken(value: string) {
-    this._auth = value
-    this.request = createRequest(this._baseUrl, this._auth)
+    this._ctx.setAuth(value)
   }
 
   revokeToken() {
-    this._auth = undefined
-    this.request = createRequest(this._baseUrl)
+    this._ctx.setAuth(undefined)
   }
 }

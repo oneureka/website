@@ -26,21 +26,36 @@ function interpolate(template: string, params: Record<string, any>): { url: stri
   return { url, query }
 }
 
-export function createRequest(baseUrl: string, auth?: string) {
+type RequestOptions = {
+  data?: any
+  headers?: Record<string, string>
+  signal?: AbortSignal
+  [key: string]: any
+}
+
+export type RequestFunction = (route: string, options?: RequestOptions) => Promise<any>
+
+export function createRequest(baseUrl: string) {
   const api = ky.create({
     prefix: baseUrl,
     throwHttpErrors: false,
   })
 
-  return async function request(
+  let auth: string | undefined
+
+  function setAuth(value: string | undefined) {
+    auth = value
+  }
+
+  const request: RequestFunction = async function (
     route: string,
-    options: Record<string, any> = {},
+    options: RequestOptions = {},
   ): Promise<any> {
     const sep = route.indexOf(' ')
     const method = route.slice(0, sep) as 'GET' | 'POST' | 'PUT' | 'DELETE'
     const urlTemplate = route.slice(sep + 1)
 
-    const { data, headers: extraHeaders, ...rest } = options
+    const { data, headers, signal, ...rest } = options
     const { url: resolvedUrl, query } = interpolate(urlTemplate, rest)
 
     const searchParams: Record<string, string> = { ...query }
@@ -50,8 +65,9 @@ export function createRequest(baseUrl: string, auth?: string) {
 
     const requestOptions: Record<string, any> = {
       method,
-      headers: { ...extraHeaders },
+      headers,
       searchParams,
+      signal,
     }
 
     if (data instanceof FormData) {
@@ -70,4 +86,6 @@ export function createRequest(baseUrl: string, auth?: string) {
     if (response.status === 204) return null
     return response.json()
   }
+
+  return { setAuth, request }
 }
