@@ -1,34 +1,14 @@
-export type ReplyObject = {
+import type { User } from './user'
+
+export type Reply = {
   id: number
   body: string
-  bodyHtml: string
-  topicId: number
-  topicTitle: string
+  body_html: string
+  topic_id: number
+  topic_title: string
   deleted: boolean
-  likesCount: number
-  userId: number
-  userName: string
-  userLogin: string
-  userAvatarUrl: string
-  createdAt: string
-  updatedAt: string
-}
-
-export function transformReply(data: Record<string, any>): ReplyObject {
-  const user = data.user || {}
-  return {
-    id: data.id,
-    body: data.body,
-    bodyHtml: data.body_html,
-    topicId: data.topic_id,
-    topicTitle: data.topic_title,
-    deleted: !!data.deleted,
-    likesCount: data.likes_count,
-    userId: user.id,
-    userName: user.name,
-    userLogin: user.login,
-    userAvatarUrl: user.avatar_url,
-    createdAt: data.created_at,
-    updatedAt: data.updated_at,
-  }
+  likes_count: number
+  user: User
+  created_at: string
+  updated_at: string
 }

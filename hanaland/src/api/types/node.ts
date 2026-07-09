@@ -1,23 +1,10 @@
-export type NodeObject = {
+export type Node = {
   id: number
   name: string
   summary: string
-  sectionId: number
-  sectionName: string
-  topicsCount: number
+  section_id: number
+  section_name: string
+  topics_count: number
   sort: number
-  updatedAt: string
-}
-
-export function transformNode(data: Record<string, any>): NodeObject {
-  return {
-    id: data.id,
-    name: data.name,
-    summary: data.summary,
-    sectionId: data.section_id,
-    sectionName: data.section_name,
-    topicsCount: data.topics_count,
-    sort: data.sort,
-    updatedAt: data.updated_at,
-  }
+  updated_at: string
 }

@@ -10,7 +10,6 @@ type EndpointDef = {
   id: string
   method: 'GET' | 'POST' | 'PUT' | 'DELETE'
   url: string
-  transform?: (data: any, params?: any) => any
 }
 
 type EndpointsArray = readonly EndpointDef[]
@@ -18,11 +17,9 @@ type EndpointsArray = readonly EndpointDef[]
 function buildMethods(endpoints: EndpointsArray, request: ReturnType<typeof createRequest>) {
   const methods: Record<string, Function> = {}
 
-  for (const { id, method, url, transform } of endpoints) {
+  for (const { id, method, url } of endpoints) {
     methods[id] = async function (options: Record<string, any> = {}) {
-      const route = `${method} ${url}`
-      const result = await request(route, options)
-      return transform ? transform(result, options) : result
+      return request(`${method} ${url}`, options)
     }
   }
 

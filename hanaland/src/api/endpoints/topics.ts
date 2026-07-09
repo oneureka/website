@@ -1,25 +1,6 @@
-import type { TopicObject } from '../types/topic'
-import { transformTopic } from '../types/topic'
-import { withNextCursor } from '../utils'
-
-function transformList(data: any) {
-  const topics = (data.topics || []).map(transformTopic) as TopicObject[]
-  return withNextCursor(topics, data.meta || {})
-}
-
-function transformRetrieve(data: any) {
-  const topic = transformTopic(data.topic)
-  if (data.meta) {
-    topic.isLiked = !!data.meta.liked
-    topic.isFollowed = !!data.meta.followed
-    topic.isFavorited = !!data.meta.favorited
-  }
-  return topic
-}
-
 export default [
-  { id: 'list', method: 'GET', url: '/topics', transform: transformList },
-  { id: 'retrieve', method: 'GET', url: '/topics/:id', transform: transformRetrieve },
+  { id: 'list', method: 'GET', url: '/topics' },
+  { id: 'retrieve', method: 'GET', url: '/topics/:id' },
   { id: 'create', method: 'POST', url: '/topics' },
   { id: 'update', method: 'PUT', url: '/topics/:id' },
   { id: 'destroy', method: 'DELETE', url: '/topics/:id' },
