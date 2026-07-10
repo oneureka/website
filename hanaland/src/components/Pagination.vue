@@ -12,7 +12,7 @@ const emit = defineEmits<{
 <template>
   <div class="flex items-center justify-center gap-4 border-t border-dashed border-accent/40 px-4 py-3">
     <button
-      class="label-mono flex items-center gap-1 text-base-300 hover:text-secondary"
+      class="label-mono flex items-center gap-1 text-base-300 hover:text-neutral"
       :class="{ 'opacity-30': page <= 1 }"
       :disabled="page <= 1"
       @click="emit('change', page - 1)"
@@ -24,7 +24,7 @@ const emit = defineEmits<{
     <span class="label-mono text-base-300">{{ page }} / {{ pageCount }}</span>
 
     <button
-      class="label-mono flex items-center gap-1 text-base-300 hover:text-secondary"
+      class="label-mono flex items-center gap-1 text-base-300 hover:text-neutral"
       :class="{ 'opacity-30': page >= pageCount }"
       :disabled="page >= pageCount"
       @click="emit('change', page + 1)"

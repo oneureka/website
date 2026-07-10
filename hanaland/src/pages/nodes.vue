@@ -53,7 +53,7 @@ const sortedUsers = computed(() =>
                   v-for="node in sectionNodes"
                   :key="node.id"
                   :to="`/topics?node_id=${node.id}`"
-                  class="label-mono inline-flex items-center gap-1 border border-dashed border-accent/50 px-3 py-1.5 text-xs text-base-300 no-underline hover:border-secondary hover:text-secondary"
+                  class="label-mono inline-flex items-center gap-1 border border-dashed border-accent/50 px-3 py-1.5 text-xs text-base-300 no-underline hover:border-neutral hover:text-neutral"
                 >
                   {{ node.name }}
                   <span class="opacity-60">{{ node.topics_count }}</span>
@@ -80,7 +80,7 @@ const sortedUsers = computed(() =>
             >
               <UserAvatar :src="u.avatar_url" :alt="u.name" size="sm" />
               <div class="min-w-0 flex-1">
-                <div class="truncate text-sm font-medium text-base-content hover:text-secondary">{{ u.name }}</div>
+                <div class="truncate text-sm font-medium text-base-content hover:text-neutral">{{ u.name }}</div>
                 <div class="label-mono text-xs text-base-300">{{ u.followers_count }} 关注者</div>
               </div>
             </RouterLink>

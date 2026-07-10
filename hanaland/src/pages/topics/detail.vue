@@ -125,7 +125,7 @@ function toggleFollow(userId: number, followed: boolean) {
               <UserAvatar :src="topic?.user?.avatar_url" :alt="topic?.user?.name" size="sm" />
               <RouterLink
                 :to="`/${topic?.user?.login}`"
-                class="label-mono text-base-300 no-underline hover:text-secondary"
+                class="label-mono text-base-300 no-underline hover:text-neutral"
               >
                 {{ topic?.user?.name }}
               </RouterLink>
@@ -154,7 +154,7 @@ function toggleFollow(userId: number, followed: boolean) {
             <span class="section-prefix mb-3">REPLIES ({{ topic?.replies_count }})</span>
 
             <div v-if="!auth.isAuthenticated" class="mb-4">
-              <button class="label-mono text-xs text-neutral hover:text-secondary" @click="ui.openLoginModal">
+              <button class="label-mono text-xs text-neutral hover:text-neutral" @click="ui.openLoginModal">
                 登录后回复
               </button>
             </div>
@@ -162,11 +162,11 @@ function toggleFollow(userId: number, followed: boolean) {
             <form v-else class="mb-6" @submit.prevent="submitReply">
               <textarea
                 v-model="replyBody"
-                class="textarea textarea-bordered mb-2 h-24 w-full rounded-none border-neutral bg-base-100 text-sm focus:border-secondary focus:outline-none"
+                class="textarea textarea-bordered mb-2 h-24 w-full rounded-none border-neutral bg-base-100 text-sm focus:border-accent focus:outline-none"
                 placeholder="写下你的回复..."
               />
               <div class="flex items-center justify-between">
-                <label class="label-mono flex cursor-pointer items-center gap-1 text-xs text-base-300 hover:text-secondary">
+                <label class="label-mono flex cursor-pointer items-center gap-1 text-xs text-base-300 hover:text-neutral">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -182,7 +182,7 @@ function toggleFollow(userId: number, followed: boolean) {
                   <span v-if="imageUploading" class="label-mono text-xs text-base-300">上传中...</span>
                   <button
                     type="submit"
-                    class="label-mono flex items-center gap-1 bg-neutral px-4 py-1.5 text-xs text-neutral-content hover:bg-secondary"
+                    class="label-mono flex items-center gap-1 bg-neutral px-4 py-1.5 text-xs text-neutral-content hover:bg-neutral"
                     :disabled="replying || !replyBody.trim()"
                   >
                     <span v-if="replying" class="loading loading-spinner loading-xs" />
@@ -211,7 +211,7 @@ function toggleFollow(userId: number, followed: boolean) {
                   <div class="mb-1 flex items-center gap-2">
                     <RouterLink
                       :to="`/${reply.user?.login}`"
-                      class="label-mono text-xs text-base-300 no-underline hover:text-secondary"
+                      class="label-mono text-xs text-base-300 no-underline hover:text-neutral"
                     >
                       {{ reply.user?.name }}
                     </RouterLink>
@@ -225,7 +225,7 @@ function toggleFollow(userId: number, followed: boolean) {
                   <div v-else class="text-sm text-base-content">{{ reply?.body }}</div>
                   <div class="mt-2">
                     <button
-                      class="label-mono flex items-center gap-1 text-xs text-base-300 hover:text-secondary"
+                      class="label-mono flex items-center gap-1 text-xs text-base-300 hover:text-neutral"
                       @click="toggleReplyLike(reply)"
                     >
                       <svg
@@ -251,7 +251,7 @@ function toggleFollow(userId: number, followed: boolean) {
               class="flex justify-center pt-3"
             >
               <button
-                class="label-mono text-xs text-base-300 hover:text-secondary"
+                class="label-mono text-xs text-base-300 hover:text-neutral"
                 :disabled="isFetchingNextPage"
                 @click="loadMoreReplies"
               >
@@ -277,7 +277,7 @@ function toggleFollow(userId: number, followed: boolean) {
             />
             <RouterLink
               :to="`/${topic?.user?.login}`"
-              class="font-medium text-base-content no-underline hover:text-secondary"
+              class="font-medium text-base-content no-underline hover:text-neutral"
             >
               {{ topic?.user?.name }}
             </RouterLink>

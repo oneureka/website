@@ -20,7 +20,7 @@ const emit = defineEmits<{
         <span class="section-prefix">TAGS</span>
         <button
           v-if="activeNodeId"
-          class="label-mono text-xs text-base-300 hover:text-secondary"
+          class="label-mono text-xs text-base-300 hover:text-neutral"
           @click="emit('select', undefined)"
         >
           清除
