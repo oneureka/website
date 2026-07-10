@@ -1,9 +1,18 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { useNotificationStore } from '@stores/notification'
+import { useAuthStore } from '@stores/auth'
 import UserMenu from './UserMenu.vue'
 import LoginModal from './LoginModal.vue'
 
 const notification = useNotificationStore()
+const auth = useAuthStore()
+
+onMounted(() => {
+  if (auth.isAuthenticated) {
+    notification.fetchUnreadCount()
+  }
+})
 </script>
 
 <template>
