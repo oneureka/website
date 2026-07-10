@@ -13,8 +13,8 @@ export class NotificationsResource {
     return this.api<void>(ep.markAsRead, { data: params })
   }
 
-  getUnreadCount() {
-    return this.api<{ count: number }>(ep.getUnreadCount)
+  unreadCount() {
+    return this.api<{ count: number }>(ep.unreadCount)
   }
 
   destroy(params: { id: number }) {

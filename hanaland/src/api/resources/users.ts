@@ -15,8 +15,8 @@ export class UsersResource {
     return this.api<User>(ep.retrieve, params)
   }
 
-  getAuthenticated() {
-    return this.api<User>(ep.getAuthenticated)
+  current() {
+    return this.api<User>(ep.current)
   }
 
   follow(params: { id: number }) {
