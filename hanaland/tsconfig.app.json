@@ -9,8 +9,8 @@
       "@api-client/*": ["./src/api-client/*"],
       "@js-sdk": ["./src/rest"],
       "@stores/*": ["./src/stores/*"],
-      "@views/*": ["./src/views/*"],
       "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
       "@composables/*": ["./src/composables/*"],
       "@utils/*": ["./src/utils/*"]
     },
