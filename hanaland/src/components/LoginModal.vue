@@ -40,7 +40,7 @@ async function handleLogin() {
               v-model="username"
               type="text"
               placeholder="USERNAME"
-              class="w-full border border-primary bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
+              class="w-full border border-neutral bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
               required
             >
           </div>
@@ -50,14 +50,14 @@ async function handleLogin() {
               v-model="password"
               type="password"
               placeholder="PASSWORD"
-              class="w-full border border-primary bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
+              class="w-full border border-neutral bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
               required
             >
           </div>
 
-          <p v-if="error" class="label-mono mb-2 text-xs text-primary">{{ error }}</p>
+          <p v-if="error" class="label-mono mb-2 text-xs text-error">{{ error }}</p>
 
-          <button type="submit" class="label-mono flex w-full items-center justify-center bg-primary px-4 py-2 text-sm text-primary-content hover:bg-secondary" :disabled="auth.loading">
+          <button type="submit" class="label-mono flex w-full items-center justify-center bg-neutral px-4 py-2 text-sm text-neutral-content hover:bg-secondary" :disabled="auth.loading">
             <span v-if="auth.loading" class="loading loading-spinner loading-xs mr-1" />
             登录
           </button>

@@ -21,8 +21,8 @@ const tabs = [
     <button
       v-for="tab in tabs"
       :key="tab.key"
-      class="label-mono relative flex h-10 items-center px-4 text-base-300 hover:text-primary"
-      :class="{ 'text-primary': active === tab.key }"
+      class="label-mono relative flex h-10 items-center px-4 text-base-300 hover:text-secondary"
+      :class="{ 'text-neutral': active === tab.key }"
       @click="emit('change', tab.key)"
     >
       {{ tab.label }}

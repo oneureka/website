@@ -14,8 +14,8 @@ const emit = defineEmits<{
   <button
     class="label-mono inline-flex items-center gap-1 px-3 py-1.5 text-xs"
     :class="active
-      ? 'bg-primary text-primary-content border border-primary'
-      : 'text-base-300 border border-dashed border-secondary/50 hover:border-secondary hover:text-primary'"
+      ? 'bg-neutral text-neutral-content border border-neutral'
+      : 'text-base-300 border border-dashed border-secondary/50 hover:border-secondary hover:text-secondary'"
     @click="emit('click')"
   >
     {{ name }}<span v-if="count !== undefined" class="opacity-60">{{ count }}</span>

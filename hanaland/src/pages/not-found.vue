@@ -11,7 +11,7 @@ const { t } = useI18n()
     <p class="mb-8 text-sm text-base-300">
       {{ t('this_is_not_the_web_page_you_are_looking_for') }}
     </p>
-    <RouterLink to="/topics" class="label-mono flex items-center gap-1 border border-primary px-4 py-2 text-xs text-primary hover:bg-primary hover:text-primary-content">
+    <RouterLink to="/topics" class="label-mono flex items-center gap-1 border border-neutral px-4 py-2 text-xs text-neutral hover:bg-neutral hover:text-neutral-content">
       返回首页
     </RouterLink>
   </div>

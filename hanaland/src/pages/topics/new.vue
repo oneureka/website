@@ -78,7 +78,7 @@ function submit() {
               v-model="title"
               type="text"
               placeholder="TITLE"
-              class="w-full border border-primary bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
+              class="w-full border-neutral bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
               required
             />
           </div>
@@ -86,7 +86,7 @@ function submit() {
           <div class="mb-4">
             <select
               v-model="nodeId"
-              class="w-full border border-primary bg-base-100 px-3 py-2 font-mono text-sm text-base-content outline-none focus:border-secondary"
+              class="w-full border-neutral bg-base-100 px-3 py-2 font-mono text-sm text-base-content outline-none focus:border-secondary"
               required
             >
               <option :value="undefined" disabled>SELECT NODE</option>
@@ -109,14 +109,14 @@ function submit() {
           <div class="mb-4">
             <textarea
               v-model="body"
-              class="h-64 w-full border border-primary bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
+              class="h-64 w-full border-neutral bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
               placeholder="正文，支持 Markdown 格式"
               required
             />
           </div>
 
           <div class="flex items-center justify-between">
-            <label class="label-mono flex cursor-pointer items-center gap-1 text-xs text-base-300 hover:text-primary">
+            <label class="label-mono flex cursor-pointer items-center gap-1 text-xs text-base-300 hover:text-secondary">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
@@ -131,10 +131,10 @@ function submit() {
 
             <div class="flex items-center gap-2">
               <span v-if="imageUploading" class="label-mono text-xs text-base-300">上传中...</span>
-              <RouterLink to="/topics" class="label-mono text-xs text-base-300 hover:text-primary">取消</RouterLink>
+              <RouterLink to="/topics" class="label-mono text-xs text-base-300 hover:text-secondary">取消</RouterLink>
               <button
                 type="submit"
-                class="label-mono flex items-center gap-1 bg-primary px-4 py-1.5 text-xs text-primary-content hover:bg-secondary"
+                class="label-mono flex items-center gap-1 bg-neutral px-4 py-1.5 text-xs text-neutral-content hover:bg-secondary"
                 :disabled="!title.trim() || !body.trim() || !nodeId || createMutation.isPending"
               >
                 <span v-if="createMutation.isPending" class="loading loading-spinner loading-xs" />

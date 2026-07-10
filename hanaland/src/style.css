@@ -21,9 +21,9 @@ body {
 }
 
 /* ── Dashed border helpers ── */
-.border-dashed-primary {
+.border-dashed-neutral {
   border-style: dashed;
-  border-color: var(--color-primary);
+  border-color: var(--color-neutral);
 }
 .border-dashed-secondary {
   border-style: dashed;
@@ -57,7 +57,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid var(--color-primary);
+  border: 1px solid var(--color-neutral);
   background: var(--color-base-100);
 }
 

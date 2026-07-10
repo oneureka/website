@@ -20,14 +20,14 @@ const ui = useUIStore()
     <div class="flex min-w-0 flex-1 flex-col gap-0.5">
       <RouterLink
         :to="`/topics/${topic.id}`"
-        class="truncate font-medium text-base-content no-underline hover:text-primary"
+        class="truncate font-medium text-base-content no-underline hover:text-secondary"
       >
         {{ topic.title }}
       </RouterLink>
       <div class="flex flex-wrap items-baseline gap-x-3 text-xs text-base-300">
         <RouterLink
           :to="`/${topic.user.login}`"
-          class="label-mono shrink-0 text-base-300 no-underline hover:text-primary"
+          class="label-mono shrink-0 text-base-300 no-underline hover:text-secondary"
         >
           {{ topic.user.name }}
         </RouterLink>
@@ -40,7 +40,7 @@ const ui = useUIStore()
 
     <div class="flex shrink-0 items-center gap-3">
       <button
-        class="label-mono flex items-center gap-1 text-base-300 hover:text-primary"
+        class="label-mono flex items-center gap-1 text-base-300 hover:text-secondary"
         @click="auth.isAuthenticated ? null : ui.openLoginModal()"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

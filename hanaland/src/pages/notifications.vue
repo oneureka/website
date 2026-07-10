@@ -91,13 +91,13 @@ function typeLabel(type: string) {
         <span class="section-prefix">NOTIFICATIONS</span>
         <div class="flex gap-2">
           <button
-            class="label-mono text-xs text-base-300 hover:text-primary"
+            class="label-mono text-xs text-base-300 hover:text-secondary"
             @click="markAllReadMutation.mutate()"
           >
             全部已读
           </button>
           <button
-            class="label-mono text-xs text-base-300 hover:text-primary"
+            class="label-mono text-xs text-base-300 hover:text-secondary"
             @click="clearMutation.mutate()"
           >
             清空
@@ -107,24 +107,24 @@ function typeLabel(type: string) {
 
       <div class="flex gap-0 border-b border-secondary/40">
         <button
-          class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-primary"
-          :class="{ 'text-primary': activeTab === 'all' }"
+          class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-secondary"
+          :class="{ 'text-neutral': activeTab === 'all' }"
           @click="activeTab = 'all'"
         >
           全部
           <span v-if="activeTab === 'all'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
         </button>
         <button
-          class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-primary"
-          :class="{ 'text-primary': activeTab === 'unread' }"
+          class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-secondary"
+          :class="{ 'text-neutral': activeTab === 'unread' }"
           @click="activeTab = 'unread'"
         >
           未读
           <span v-if="activeTab === 'unread'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
         </button>
         <button
-          class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-primary"
-          :class="{ 'text-primary': activeTab === 'read' }"
+          class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-secondary"
+          :class="{ 'text-neutral': activeTab === 'read' }"
           @click="activeTab = 'read'"
         >
           已读
@@ -140,7 +140,7 @@ function typeLabel(type: string) {
           v-for="n in filtered"
           :key="n.id"
           class="flex items-start gap-3 px-4 py-3"
-          :class="{ 'bg-primary/[0.03]': !n.read }"
+          :class="{ 'bg-neutral/[0.03]': !n.read }"
           @click="markAsRead(n)"
         >
           <UserAvatar
@@ -153,7 +153,7 @@ function typeLabel(type: string) {
             <div class="text-sm">
               <RouterLink
                 :to="`/${n.actor?.login}`"
-                class="font-medium text-base-content no-underline hover:text-primary"
+                class="font-medium text-base-content no-underline hover:text-secondary"
               >
                 {{ n.actor?.name }}
               </RouterLink>
@@ -162,7 +162,7 @@ function typeLabel(type: string) {
             <div class="label-mono mt-0.5 text-xs text-base-300">{{ n.created_at }}</div>
           </div>
           <button
-            class="label-mono shrink-0 text-xs text-base-300 hover:text-primary"
+            class="label-mono shrink-0 text-xs text-base-300 hover:text-secondary"
             @click.stop="deleteMutation.mutate(n.id)"
           >
             删除
@@ -175,7 +175,7 @@ function typeLabel(type: string) {
         class="flex justify-center border-t border-dashed border-secondary/40 py-3"
       >
         <button
-          class="label-mono text-xs text-base-300 hover:text-primary"
+          class="label-mono text-xs text-base-300 hover:text-secondary"
           @click="loadMore"
         >
           加载更多

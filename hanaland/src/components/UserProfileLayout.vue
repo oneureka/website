@@ -55,8 +55,8 @@ function toggleFollow() {
             v-for="tab in tabs"
             :key="tab.to"
             :to="tab.to"
-            class="label-mono relative flex h-10 items-center px-4 text-xs text-base-300 no-underline hover:text-primary"
-            :class="{ 'text-primary': route.fullPath === tab.to }"
+            class="label-mono relative flex h-10 items-center px-4 text-xs text-base-300 no-underline hover:text-secondary"
+            :class="{ 'text-neutral': route.fullPath === tab.to }"
           >
             {{ tab.label }}
             <span v-if="route.fullPath === tab.to" class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
@@ -74,7 +74,7 @@ function toggleFollow() {
           <UserAvatar :src="user?.avatar_url" :alt="user?.name" size="lg" class="mb-3" />
           <RouterLink
             :to="`/${user?.login}`"
-            class="text-base font-medium text-base-content no-underline hover:text-primary"
+            class="text-base font-medium text-base-content no-underline hover:text-secondary"
           >
             {{ user?.name }}
           </RouterLink>
@@ -89,7 +89,7 @@ function toggleFollow() {
           </div>
           <button
             v-if="auth.isAuthenticated && user?.login !== auth.user?.login"
-            class="label-mono mt-3 w-full border border-primary px-3 py-1.5 text-xs text-primary hover:bg-primary hover:text-primary-content"
+            class="label-mono mt-3 w-full border border-neutral px-3 py-1.5 text-xs text-neutral hover:bg-neutral hover:text-neutral-content"
             @click="toggleFollow"
           >
             {{ user?.followed ? '取消关注' : '关注' }}

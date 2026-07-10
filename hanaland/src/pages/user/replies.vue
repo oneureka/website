@@ -49,7 +49,7 @@ const replies = computed(() => data.value?.replies ?? [])
               <span class="ml-2">{{ reply?.created_at }}</span>
               <RouterLink
                 :to="`/topics/${reply.topic_id}`"
-                class="ml-2 text-primary no-underline hover:underline"
+                class="ml-2 text-neutral no-underline hover:underline"
               >
                 {{ reply.topic_title }}
               </RouterLink>
