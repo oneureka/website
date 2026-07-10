@@ -195,7 +195,7 @@ function toggleFollow(userId: number, followed: boolean) {
             <Loader v-if="repliesLoading" />
             <EmptyState v-else-if="replies.length === 0" message="暂无回复" />
 
-            <div v-else class="divide-y divide-dashed divide-secondary/40">
+            <div v-else class="divide-y divide-dashed divide-accent/40">
               <div
                 v-for="reply in replies"
                 :key="reply.id"

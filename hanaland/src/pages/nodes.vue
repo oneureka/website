@@ -53,7 +53,7 @@ const sortedUsers = computed(() =>
                   v-for="node in sectionNodes"
                   :key="node.id"
                   :to="`/topics?node_id=${node.id}`"
-                  class="label-mono inline-flex items-center gap-1 border border-dashed border-secondary/50 px-3 py-1.5 text-xs text-base-300 no-underline hover:border-secondary hover:text-secondary"
+                  class="label-mono inline-flex items-center gap-1 border border-dashed border-accent/50 px-3 py-1.5 text-xs text-base-300 no-underline hover:border-secondary hover:text-secondary"
                 >
                   {{ node.name }}
                   <span class="opacity-60">{{ node.topics_count }}</span>

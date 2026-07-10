@@ -14,7 +14,7 @@ const ui = useUIStore()
 </script>
 
 <template>
-  <div class="flex items-center gap-3 border-b border-dashed border-secondary/40 px-4 py-3 last:border-b-0">
+  <div class="flex items-center gap-3 border-b border-dashed border-accent/40 px-4 py-3 last:border-b-0">
     <UserAvatar :src="topic.user.avatar_url" :alt="topic.user.name" size="sm" />
 
     <div class="flex min-w-0 flex-1 flex-col gap-0.5">

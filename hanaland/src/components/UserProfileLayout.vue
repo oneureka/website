@@ -48,7 +48,7 @@ function toggleFollow() {
 
 <template>
   <div class="relative mx-auto flex w-full max-w-5xl flex-col md:flex-row">
-    <div class="min-w-0 border-dashed-secondary md:w-3/4 md:border-r">
+    <div class="min-w-0 border-dashed-accent md:w-3/4 md:border-r">
       <Card class="!rounded-none !border-0">
         <div class="flex gap-0 border-b border-secondary/40">
           <RouterLink
@@ -65,7 +65,7 @@ function toggleFollow() {
         <slot />
       </Card>
     </div>
-    <div class="border-t border-dashed-secondary md:w-1/4 md:border-t-0 md:pl-5">
+    <div class="border-t border-dashed-accent md:w-1/4 md:border-t-0 md:pl-5">
       <Loader v-if="isLoading" />
       <EmptyState v-else-if="!user" message="用户不存在" />
       <Card v-else>

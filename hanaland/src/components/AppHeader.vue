@@ -16,7 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <header class="bg-neutral text-neutral-content border-b-2 border-dashed border-secondary">
+  <header class="bg-neutral text-neutral-content border-b-2 border-dashed border-accent">
     <div class="mx-auto flex h-12 max-w-5xl items-center px-2">
       <div class="flex items-center">
         <RouterLink

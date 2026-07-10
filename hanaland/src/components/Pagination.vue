@@ -10,7 +10,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="flex items-center justify-center gap-4 border-t border-dashed border-secondary/40 px-4 py-3">
+  <div class="flex items-center justify-center gap-4 border-t border-dashed border-accent/40 px-4 py-3">
     <button
       class="label-mono flex items-center gap-1 text-base-300 hover:text-secondary"
       :class="{ 'opacity-30': page <= 1 }"

@@ -87,7 +87,7 @@ function typeLabel(type: string) {
 <template>
   <div class="mx-auto max-w-5xl px-4 pt-5">
     <Card>
-      <div class="flex items-center justify-between border-b border-dashed border-secondary/40 px-4 py-3">
+      <div class="flex items-center justify-between border-b border-dashed border-accent/40 px-4 py-3">
         <span class="section-prefix">NOTIFICATIONS</span>
         <div class="flex gap-2">
           <button
@@ -105,7 +105,7 @@ function typeLabel(type: string) {
         </div>
       </div>
 
-      <div class="flex gap-0 border-b border-secondary/40">
+      <div class="flex gap-0 border-b border-accent/40">
         <button
           class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-secondary"
           :class="{ 'text-neutral': activeTab === 'all' }"
@@ -135,7 +135,7 @@ function typeLabel(type: string) {
       <Loader v-if="isLoading" />
       <EmptyState v-else-if="filtered.length === 0" message="暂无通知" />
 
-      <div v-else class="divide-y divide-dashed divide-secondary/40">
+      <div v-else class="divide-y divide-dashed divide-accent/40">
         <div
           v-for="n in filtered"
           :key="n.id"
@@ -172,7 +172,7 @@ function typeLabel(type: string) {
 
       <div
         v-if="hasMore && activeTab === 'all'"
-        class="flex justify-center border-t border-dashed border-secondary/40 py-3"
+        class="flex justify-center border-t border-dashed border-accent/40 py-3"
       >
         <button
           class="label-mono text-xs text-base-300 hover:text-secondary"
