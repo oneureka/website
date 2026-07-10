@@ -6,7 +6,8 @@
     "allowArbitraryExtensions": true,
     "paths": {
       "@api-client": ["./src/api-client/index"],
-      "@api-client/*": ["./src/api-client/*"]
+      "@api-client/*": ["./src/api-client/*"],
+      "@js-sdk": ["./src/rest"]
     },
 
     /* Linting */

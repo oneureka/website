@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { Client } from '@api-client/client'
-import type { Topic } from '@api-client/index'
-
-const client = new Client({ baseUrl: import.meta.env.HANALAND_API_URL })
+import type { Topic } from '@api-client'
+import { rest } from '@js-sdk'
 
 const topics = ref<Topic[]>([])
 const loading = ref(true)
@@ -11,7 +9,7 @@ const error = ref<string | null>(null)
 
 onMounted(async () => {
   try {
-    const res = await client.topics.list({ limit: 20, offset: 0 })
+    const res = await rest.topics.list({ limit: 20, offset: 0 })
     topics.value = res.topics ?? res
   } catch (e: any) {
     error.value = e.message ?? '加载失败'
