@@ -1,40 +1,39 @@
-import ky from 'ky'
-import { createRequest, type RequestFunction } from './request'
+import { NodesResource } from './resources/nodes'
+import { NotificationsResource } from './resources/notifications'
+import { PhotosResource } from './resources/photos'
+import { RepliesResource } from './resources/replies'
 import { TopicsResource } from './resources/topics'
 import { UsersResource } from './resources/users'
-import { NodesResource } from './resources/nodes'
-import { RepliesResource } from './resources/replies'
-import { PhotosResource } from './resources/photos'
-import { NotificationsResource } from './resources/notifications'
+import { createRequest, type RequestFunction } from './request'
+import ky from 'ky'
 
-export interface HanalandOptions {
+export interface ClientOptions {
   baseUrl?: string
   auth?: string
 }
 
 export class Client {
-  request: RequestFunction
-  topics: TopicsResource
-  users: UsersResource
-  nodes: NodesResource
-  replies: RepliesResource
-  photos: PhotosResource
-  notifications: NotificationsResource
+  readonly request: RequestFunction
+  readonly topics: TopicsResource
+  readonly users: UsersResource
+  readonly nodes: NodesResource
+  readonly replies: RepliesResource
+  readonly photos: PhotosResource
+  readonly notifications: NotificationsResource
 
-  private _setAuth: (value?: string) => void
+  private readonly _setAuth: (value?: string) => void
 
-  constructor({ baseUrl, auth }: HanalandOptions = {}) {
-    const base = baseUrl || import.meta.env.HANALAND_API_URL || ''
-    const ctx = createRequest(ky, base)
+  constructor({ baseUrl, auth }: ClientOptions = {}) {
+    const ctx = createRequest(ky, baseUrl ?? '')
     this.request = ctx.request
     this._setAuth = ctx.setAuth
 
+    this.nodes = new NodesResource(this.request)
+    this.notifications = new NotificationsResource(this.request)
+    this.photos = new PhotosResource(this.request)
+    this.replies = new RepliesResource(this.request)
     this.topics = new TopicsResource(this.request)
     this.users = new UsersResource(this.request)
-    this.nodes = new NodesResource(this.request)
-    this.replies = new RepliesResource(this.request)
-    this.photos = new PhotosResource(this.request)
-    this.notifications = new NotificationsResource(this.request)
 
     if (auth) ctx.setAuth(auth)
   }

@@ -1,6 +1,6 @@
 import type { KyInstance } from 'ky'
-import { compileUrl } from '../utils/compile-url'
 import type { RequestFunction } from './types/api'
+import { compileUrl } from '../utils/compile-url'
 
 export function createRequest(kyInstance: { create: (options?: object) => KyInstance }, baseUrl: string) {
   let auth: string | undefined
@@ -21,7 +21,7 @@ export function createRequest(kyInstance: { create: (options?: object) => KyInst
     auth = value
   }
 
-  const request: RequestFunction = async function (route, options = {}) {
+  const request: RequestFunction = async function (route, options = {}): Promise<any> {
     const { method, url: urlTemplate } = route
     const { data, ...rest } = options
     const { url: resolvedUrl, query } = compileUrl(urlTemplate, rest)
