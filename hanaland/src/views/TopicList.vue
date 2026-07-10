@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { rest } from '../api'
-import type { Topic } from '../api'
+import { rest } from '../api-client'
+import type { Topic } from '../api-client'
 
 const topics = ref<Topic[]>([])
 const loading = ref(true)
