@@ -7,7 +7,12 @@
     "paths": {
       "@api-client": ["./src/api-client/index"],
       "@api-client/*": ["./src/api-client/*"],
-      "@js-sdk": ["./src/rest"]
+      "@js-sdk": ["./src/rest"],
+      "@stores/*": ["./src/stores/*"],
+      "@views/*": ["./src/views/*"],
+      "@components/*": ["./src/components/*"],
+      "@composables/*": ["./src/composables/*"],
+      "@utils/*": ["./src/utils/*"]
     },
 
     /* Linting */
