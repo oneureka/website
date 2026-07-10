@@ -14,7 +14,7 @@ const router = createRouter({
     {
       path: '/topics/:id',
       name: 'topic-detail',
-      component: () => import('@pages/topics/[id].vue'),
+      component: () => import('@pages/topics/detail.vue'),
     },
     { path: '/login', name: 'login', component: () => import('@pages/login.vue') },
     {
@@ -34,28 +34,28 @@ const router = createRouter({
     },
     {
       path: '/:login',
-      component: () => import('@pages/[login].vue'),
+      component: () => import('@pages/user/home.vue'),
     },
     {
       path: '/:login/replies',
-      component: () => import('@pages/[login]/replies.vue'),
+      component: () => import('@pages/user/replies.vue'),
     },
     {
       path: '/:login/followers',
-      component: () => import('@pages/[login]/followers.vue'),
+      component: () => import('@pages/user/followers.vue'),
     },
     {
       path: '/:login/following',
-      component: () => import('@pages/[login]/following.vue'),
+      component: () => import('@pages/user/following.vue'),
     },
     {
       path: '/:login/favorites',
-      component: () => import('@pages/[login]/favorites.vue'),
+      component: () => import('@pages/user/favorites.vue'),
     },
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
-      component: () => import('@pages/[...pathMatch].vue'),
+      component: () => import('@pages/not-found.vue'),
     },
   ],
 })
