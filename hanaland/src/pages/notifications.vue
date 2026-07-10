@@ -87,39 +87,17 @@ function typeLabel(type: string) {
 <template>
   <div class="mx-auto max-w-5xl px-4 pt-5">
     <Card>
-      <div class="flex h-14 items-center justify-between border-b border-base-200 px-4">
-        <div class="flex gap-1">
+      <div class="flex items-center justify-between border-b border-dashed border-secondary/40 px-4 py-3">
+        <span class="section-prefix">NOTIFICATIONS</span>
+        <div class="flex gap-2">
           <button
-            class="btn btn-ghost btn-sm rounded-full"
-            :class="{ 'btn-primary': activeTab === 'all' }"
-            @click="activeTab = 'all'"
-          >
-            全部
-          </button>
-          <button
-            class="btn btn-ghost btn-sm rounded-full"
-            :class="{ 'btn-primary': activeTab === 'unread' }"
-            @click="activeTab = 'unread'"
-          >
-            未读
-          </button>
-          <button
-            class="btn btn-ghost btn-sm rounded-full"
-            :class="{ 'btn-primary': activeTab === 'read' }"
-            @click="activeTab = 'read'"
-          >
-            已读
-          </button>
-        </div>
-        <div class="flex gap-1">
-          <button
-            class="btn btn-ghost btn-xs text-primary"
+            class="label-mono text-xs text-base-300 hover:text-primary"
             @click="markAllReadMutation.mutate()"
           >
             全部已读
           </button>
           <button
-            class="btn btn-ghost btn-xs text-error"
+            class="label-mono text-xs text-base-300 hover:text-primary"
             @click="clearMutation.mutate()"
           >
             清空
@@ -127,15 +105,42 @@ function typeLabel(type: string) {
         </div>
       </div>
 
+      <div class="flex gap-0 border-b border-secondary/40">
+        <button
+          class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-primary"
+          :class="{ 'text-primary': activeTab === 'all' }"
+          @click="activeTab = 'all'"
+        >
+          全部
+          <span v-if="activeTab === 'all'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
+        </button>
+        <button
+          class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-primary"
+          :class="{ 'text-primary': activeTab === 'unread' }"
+          @click="activeTab = 'unread'"
+        >
+          未读
+          <span v-if="activeTab === 'unread'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
+        </button>
+        <button
+          class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-primary"
+          :class="{ 'text-primary': activeTab === 'read' }"
+          @click="activeTab = 'read'"
+        >
+          已读
+          <span v-if="activeTab === 'read'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
+        </button>
+      </div>
+
       <Loader v-if="isLoading" />
       <EmptyState v-else-if="filtered.length === 0" message="暂无通知" />
 
-      <div v-else class="divide-y">
+      <div v-else class="divide-y divide-dashed divide-secondary/40">
         <div
           v-for="n in filtered"
           :key="n.id"
           class="flex items-start gap-3 px-4 py-3"
-          :class="{ 'bg-primary/5': !n.read }"
+          :class="{ 'bg-primary/[0.03]': !n.read }"
           @click="markAsRead(n)"
         >
           <UserAvatar
@@ -148,31 +153,29 @@ function typeLabel(type: string) {
             <div class="text-sm">
               <RouterLink
                 :to="`/${n.actor?.login}`"
-                class="font-medium text-base-content no-underline hover:underline"
+                class="font-medium text-base-content no-underline hover:text-primary"
               >
                 {{ n.actor?.name }}
               </RouterLink>
               <span class="text-base-300"> {{ typeLabel(n.type) }}</span>
             </div>
-            <div class="mt-0.5 text-xs text-base-300">{{ n.created_at }}</div>
+            <div class="label-mono mt-0.5 text-xs text-base-300">{{ n.created_at }}</div>
           </div>
           <button
-            class="btn btn-ghost btn-xs text-base-300 hover:text-error shrink-0"
+            class="label-mono shrink-0 text-xs text-base-300 hover:text-primary"
             @click.stop="deleteMutation.mutate(n.id)"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-            </svg>
+            删除
           </button>
         </div>
       </div>
 
       <div
         v-if="hasMore && activeTab === 'all'"
-        class="flex justify-center py-3"
+        class="flex justify-center border-t border-dashed border-secondary/40 py-3"
       >
         <button
-          class="btn btn-ghost btn-sm"
+          class="label-mono text-xs text-base-300 hover:text-primary"
           @click="loadMore"
         >
           加载更多

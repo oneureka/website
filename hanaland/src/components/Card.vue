@@ -1,5 +1,8 @@
 <template>
-  <div class="divide-y rounded-box bg-base-100 shadow-sm">
-    <slot />
+  <div class="card-offset">
+    <div class="card-offset-shadow" />
+    <div class="card-offset-inner">
+      <slot />
+    </div>
   </div>
 </template>

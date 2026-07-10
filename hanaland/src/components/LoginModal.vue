@@ -29,37 +29,40 @@ async function handleLogin() {
     class="modal"
     @click.self="ui.closeLoginModal"
   >
-    <div class="modal-box">
-      <form @submit.prevent="handleLogin">
-        <h3 class="mb-4 text-lg font-bold">登录</h3>
+    <div class="card-offset w-full max-w-sm">
+      <div class="card-offset-shadow" />
+      <div class="card-offset-inner p-6">
+        <form @submit.prevent="handleLogin">
+          <span class="section-prefix mb-4">LOGIN</span>
 
-        <div class="mb-3">
-          <input
-            v-model="username"
-            type="text"
-            placeholder="用户名"
-            class="input input-bordered w-full"
-            required
-          >
-        </div>
+          <div class="mb-3">
+            <input
+              v-model="username"
+              type="text"
+              placeholder="USERNAME"
+              class="w-full border border-primary bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
+              required
+            >
+          </div>
 
-        <div class="mb-3">
-          <input
-            v-model="password"
-            type="password"
-            placeholder="密码"
-            class="input input-bordered w-full"
-            required
-          >
-        </div>
+          <div class="mb-3">
+            <input
+              v-model="password"
+              type="password"
+              placeholder="PASSWORD"
+              class="w-full border border-primary bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
+              required
+            >
+          </div>
 
-        <p v-if="error" class="mb-2 text-sm text-red-600">{{ error }}</p>
+          <p v-if="error" class="label-mono mb-2 text-xs text-primary">{{ error }}</p>
 
-        <button type="submit" class="btn btn-primary w-full" :disabled="auth.loading">
-          <span v-if="auth.loading" class="loading loading-spinner" />
-          登录
-        </button>
-      </form>
+          <button type="submit" class="label-mono flex w-full items-center justify-center bg-primary px-4 py-2 text-sm text-primary-content hover:bg-secondary" :disabled="auth.loading">
+            <span v-if="auth.loading" class="loading loading-spinner loading-xs mr-1" />
+            登录
+          </button>
+        </form>
+      </div>
     </div>
 
     <form method="dialog" class="modal-backdrop">

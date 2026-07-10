@@ -69,16 +69,16 @@ function submit() {
 <template>
   <div class="mx-auto max-w-3xl px-4 pt-5">
     <Card>
-      <div class="px-4 py-4">
-        <h1 class="mb-6 text-xl font-bold text-base-content">创建话题</h1>
+      <div class="p-4">
+        <span class="section-prefix mb-4">NEW TOPIC</span>
 
         <form @submit.prevent="submit">
           <div class="mb-4">
             <input
               v-model="title"
               type="text"
-              placeholder="标题"
-              class="input input-bordered w-full"
+              placeholder="TITLE"
+              class="w-full border border-primary bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
               required
             />
           </div>
@@ -86,10 +86,10 @@ function submit() {
           <div class="mb-4">
             <select
               v-model="nodeId"
-              class="select select-bordered w-full"
+              class="w-full border border-primary bg-base-100 px-3 py-2 font-mono text-sm text-base-content outline-none focus:border-secondary"
               required
             >
-              <option :value="undefined" disabled>选择分类</option>
+              <option :value="undefined" disabled>SELECT NODE</option>
               <optgroup
                 v-for="[section, sectionNodes] in groupedNodes"
                 :key="section"
@@ -109,14 +109,14 @@ function submit() {
           <div class="mb-4">
             <textarea
               v-model="body"
-              class="textarea textarea-bordered h-64 w-full"
+              class="h-64 w-full border border-primary bg-base-100 px-3 py-2 font-mono text-sm text-base-content placeholder-base-300 outline-none focus:border-secondary"
               placeholder="正文，支持 Markdown 格式"
               required
             />
           </div>
 
           <div class="flex items-center justify-between">
-            <label class="btn btn-ghost btn-sm">
+            <label class="label-mono flex cursor-pointer items-center gap-1 text-xs text-base-300 hover:text-primary">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
@@ -130,11 +130,11 @@ function submit() {
             </label>
 
             <div class="flex items-center gap-2">
-              <span v-if="imageUploading" class="text-sm text-base-300">上传中...</span>
-              <RouterLink to="/topics" class="btn btn-ghost btn-sm">取消</RouterLink>
+              <span v-if="imageUploading" class="label-mono text-xs text-base-300">上传中...</span>
+              <RouterLink to="/topics" class="label-mono text-xs text-base-300 hover:text-primary">取消</RouterLink>
               <button
                 type="submit"
-                class="btn btn-primary btn-sm"
+                class="label-mono flex items-center gap-1 bg-primary px-4 py-1.5 text-xs text-primary-content hover:bg-secondary"
                 :disabled="!title.trim() || !body.trim() || !nodeId || createMutation.isPending"
               >
                 <span v-if="createMutation.isPending" class="loading loading-spinner loading-xs" />

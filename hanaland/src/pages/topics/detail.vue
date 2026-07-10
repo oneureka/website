@@ -117,18 +117,19 @@ function toggleFollow(userId: number, followed: boolean) {
 
       <template v-else>
         <Card>
-          <div class="px-4 py-4">
-              <h1 class="mb-2 text-xl font-bold text-base-content">{{ topic?.title }}</h1>
+          <div class="p-4">
+            <span class="section-prefix mb-3">TOPIC</span>
+            <h1 class="heading-section mb-3">{{ topic?.title }}</h1>
 
-            <div class="mb-4 flex items-center gap-2 text-sm text-base-300">
+            <div class="mb-4 flex items-center gap-2 text-xs text-base-300">
               <UserAvatar :src="topic?.user?.avatar_url" :alt="topic?.user?.name" size="sm" />
               <RouterLink
                 :to="`/${topic?.user?.login}`"
-                class="font-medium text-base-300 no-underline hover:underline"
+                class="label-mono text-base-300 no-underline hover:text-primary"
               >
                 {{ topic?.user?.name }}
               </RouterLink>
-              <span>&middot; 发布于 {{ topic?.created_at }}</span>
+              <span class="label-mono">{{ topic?.created_at }}</span>
             </div>
 
             <div
@@ -137,11 +138,11 @@ function toggleFollow(userId: number, followed: boolean) {
               v-html="topic?.body_html"
             />
 
-            <div v-else class="text-sm text-base-300">
+            <div v-else class="text-sm text-base-content">
               {{ topic?.body }}
             </div>
 
-            <div class="mt-4 flex items-center gap-4 text-sm text-base-300">
+            <div class="mt-4 flex items-center gap-4 label-mono text-xs text-base-300">
               <span>{{ topic?.hits }} 阅读</span>
               <span>{{ topic?.likes_count }} 点赞</span>
             </div>
@@ -149,13 +150,11 @@ function toggleFollow(userId: number, followed: boolean) {
         </Card>
 
         <Card class="mt-4">
-          <div class="px-4 py-4">
-            <h2 class="mb-3 text-base font-bold text-base-content">
-              回复 ({{ topic?.replies_count }})
-            </h2>
+          <div class="p-4">
+            <span class="section-prefix mb-3">REPLIES ({{ topic?.replies_count }})</span>
 
             <div v-if="!auth.isAuthenticated" class="mb-4">
-              <button class="btn btn-ghost btn-sm text-primary" @click="ui.openLoginModal">
+              <button class="label-mono text-xs text-primary hover:text-secondary" @click="ui.openLoginModal">
                 登录后回复
               </button>
             </div>
@@ -163,11 +162,11 @@ function toggleFollow(userId: number, followed: boolean) {
             <form v-else class="mb-6" @submit.prevent="submitReply">
               <textarea
                 v-model="replyBody"
-                class="textarea textarea-bordered mb-2 h-24 w-full"
+                class="textarea textarea-bordered mb-2 h-24 w-full rounded-none border border-primary bg-base-100 text-sm focus:border-secondary focus:outline-none"
                 placeholder="写下你的回复..."
               />
               <div class="flex items-center justify-between">
-                <label class="btn btn-ghost btn-sm">
+                <label class="label-mono flex cursor-pointer items-center gap-1 text-xs text-base-300 hover:text-primary">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -179,26 +178,28 @@ function toggleFollow(userId: number, followed: boolean) {
                     @change="handleImageUpload"
                   />
                 </label>
-                <span v-if="imageUploading" class="text-sm text-base-300">上传中...</span>
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-sm"
-                  :disabled="replying || !replyBody.trim()"
-                >
-                  <span v-if="replying" class="loading loading-spinner loading-xs" />
-                  回复
-                </button>
+                <div class="flex items-center gap-2">
+                  <span v-if="imageUploading" class="label-mono text-xs text-base-300">上传中...</span>
+                  <button
+                    type="submit"
+                    class="label-mono flex items-center gap-1 bg-primary px-4 py-1.5 text-xs text-primary-content hover:bg-secondary"
+                    :disabled="replying || !replyBody.trim()"
+                  >
+                    <span v-if="replying" class="loading loading-spinner loading-xs" />
+                    回复
+                  </button>
+                </div>
               </div>
             </form>
 
             <Loader v-if="repliesLoading" />
             <EmptyState v-else-if="replies.length === 0" message="暂无回复" />
 
-            <div v-else class="divide-y">
+            <div v-else class="divide-y divide-dashed divide-secondary/40">
               <div
                 v-for="reply in replies"
                 :key="reply.id"
-                class="flex gap-3 px-0 py-4"
+                class="flex gap-3 py-4"
               >
                 <UserAvatar
                   :src="reply.user?.avatar_url"
@@ -207,14 +208,14 @@ function toggleFollow(userId: number, followed: boolean) {
                   class="shrink-0"
                 />
                 <div class="min-w-0 flex-1">
-                  <div class="mb-1 flex items-center gap-2 text-sm">
+                  <div class="mb-1 flex items-center gap-2">
                     <RouterLink
                       :to="`/${reply.user?.login}`"
-                      class="font-medium text-base-300 no-underline hover:underline"
+                      class="label-mono text-xs text-base-300 no-underline hover:text-primary"
                     >
                       {{ reply.user?.name }}
                     </RouterLink>
-                    <span class="text-base-300">{{ reply?.created_at }}</span>
+                    <span class="label-mono text-xs text-base-300">{{ reply?.created_at }}</span>
                   </div>
                   <div
                     v-if="reply?.body_html"
@@ -224,13 +225,13 @@ function toggleFollow(userId: number, followed: boolean) {
                   <div v-else class="text-sm text-base-content">{{ reply?.body }}</div>
                   <div class="mt-2">
                     <button
-                      class="btn btn-ghost btn-xs gap-1 text-base-300"
+                      class="label-mono flex items-center gap-1 text-xs text-base-300 hover:text-primary"
                       @click="toggleReplyLike(reply)"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4"
-                        :class="(reply as any)?.liked ? 'text-primary fill-current' : ''"
+                        class="h-3.5 w-3.5"
+                        :class="(reply as any)?.liked ? 'text-secondary fill-current' : ''"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -247,10 +248,10 @@ function toggleFollow(userId: number, followed: boolean) {
 
             <div
               v-if="hasMoreReplies"
-              class="flex justify-center py-3"
+              class="flex justify-center pt-3"
             >
               <button
-                class="btn btn-ghost btn-sm"
+                class="label-mono text-xs text-base-300 hover:text-primary"
                 :disabled="isFetchingNextPage"
                 @click="loadMoreReplies"
               >
@@ -266,7 +267,8 @@ function toggleFollow(userId: number, followed: boolean) {
     <template #sidebar>
       <Card v-if="topic">
         <div class="p-4">
-          <div class="mb-3 flex flex-col items-center text-center">
+          <span class="section-prefix mb-3">AUTHOR</span>
+          <div class="flex flex-col items-center text-center">
             <UserAvatar
               :src="topic?.user?.avatar_url"
               :alt="topic?.user?.name"
@@ -275,21 +277,21 @@ function toggleFollow(userId: number, followed: boolean) {
             />
             <RouterLink
               :to="`/${topic?.user?.login}`"
-              class="font-bold text-base-content no-underline hover:underline"
+              class="font-medium text-base-content no-underline hover:text-primary"
             >
               {{ topic?.user?.name }}
             </RouterLink>
-            <p v-if="topic?.user?.tagline" class="mt-1 text-sm text-base-300">
+            <p v-if="topic?.user?.tagline" class="mt-1 text-xs text-base-300">
               {{ topic?.user?.tagline }}
             </p>
+            <button
+              v-if="auth.isAuthenticated && topic?.user?.login !== auth.user?.login"
+              class="label-mono mt-3 w-full border border-primary px-3 py-1.5 text-xs text-primary hover:bg-primary hover:text-primary-content"
+              @click="toggleFollow(topic?.user?.id, topic?.user?.followed)"
+            >
+              {{ topic?.user?.followed ? '取消关注' : '关注' }}
+            </button>
           </div>
-          <button
-            v-if="auth.isAuthenticated && topic?.user?.login !== auth.user?.login"
-            class="btn btn-outline btn-primary btn-sm w-full"
-            @click="toggleFollow(topic?.user?.id, topic?.user?.followed)"
-          >
-            {{ topic?.user?.followed ? '取消关注' : '关注' }}
-          </button>
         </div>
       </Card>
     </template>

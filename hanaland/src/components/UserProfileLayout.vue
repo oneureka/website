@@ -47,34 +47,49 @@ function toggleFollow() {
 </script>
 
 <template>
-  <div class="mx-auto flex w-full max-w-5xl flex-col gap-4 px-4 pt-5 md:flex-row md:px-2">
-    <div class="min-w-0 md:w-3/4">
-      <slot />
+  <div class="relative mx-auto flex w-full max-w-5xl flex-col md:flex-row">
+    <div class="min-w-0 border-dashed-secondary md:w-3/4 md:border-r">
+      <Card class="!rounded-none !border-0">
+        <div class="flex gap-0 border-b border-secondary/40">
+          <RouterLink
+            v-for="tab in tabs"
+            :key="tab.to"
+            :to="tab.to"
+            class="label-mono relative flex h-10 items-center px-4 text-xs text-base-300 no-underline hover:text-primary"
+            :class="{ 'text-primary': route.fullPath === tab.to }"
+          >
+            {{ tab.label }}
+            <span v-if="route.fullPath === tab.to" class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
+          </RouterLink>
+        </div>
+        <slot />
+      </Card>
     </div>
-    <div class="md:w-1/4 md:pl-4">
+    <div class="border-t border-dashed-secondary md:w-1/4 md:border-t-0 md:pl-5">
       <Loader v-if="isLoading" />
       <EmptyState v-else-if="!user" message="用户不存在" />
       <Card v-else>
         <div class="flex flex-col items-center p-4 text-center">
+          <span class="section-prefix mb-3">PROFILE</span>
           <UserAvatar :src="user?.avatar_url" :alt="user?.name" size="lg" class="mb-3" />
           <RouterLink
             :to="`/${user?.login}`"
-            class="text-lg font-bold text-base-content no-underline hover:underline"
+            class="text-base font-medium text-base-content no-underline hover:text-primary"
           >
             {{ user?.name }}
           </RouterLink>
-          <p v-if="user?.tagline" class="mt-1 text-sm text-base-300">{{ user?.tagline }}</p>
-          <div class="mt-3 flex w-full justify-around text-xs text-base-300">
-            <span>{{ user?.topics_count }} 话题</span>
-            <span>{{ user?.replies_count }} 回复</span>
+          <p v-if="user?.tagline" class="mt-1 text-xs text-base-300">{{ user?.tagline }}</p>
+          <div class="mt-3 flex w-full justify-around">
+            <span class="label-mono text-xs text-base-300">{{ user?.topics_count }} 话题</span>
+            <span class="label-mono text-xs text-base-300">{{ user?.replies_count }} 回复</span>
           </div>
-          <div class="mt-1 flex w-full justify-around text-xs text-base-300">
-            <span>{{ user?.followers_count }} 粉丝</span>
-            <span>{{ user?.following_count }} 关注</span>
+          <div class="mt-1 flex w-full justify-around">
+            <span class="label-mono text-xs text-base-300">{{ user?.followers_count }} 粉丝</span>
+            <span class="label-mono text-xs text-base-300">{{ user?.following_count }} 关注</span>
           </div>
           <button
             v-if="auth.isAuthenticated && user?.login !== auth.user?.login"
-            class="btn btn-outline btn-primary btn-sm mt-3 w-full"
+            class="label-mono mt-3 w-full border border-primary px-3 py-1.5 text-xs text-primary hover:bg-primary hover:text-primary-content"
             @click="toggleFollow"
           >
             {{ user?.followed ? '取消关注' : '关注' }}

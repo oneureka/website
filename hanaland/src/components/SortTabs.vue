@@ -17,15 +17,19 @@ const tabs = [
 </script>
 
 <template>
-  <div class="flex h-14 items-center gap-1 overflow-x-auto px-3">
+  <div class="flex items-center gap-0 overflow-x-auto border-b border-secondary/40">
     <button
       v-for="tab in tabs"
       :key="tab.key"
-      class="btn btn-ghost btn-sm rounded-full"
-      :class="{ 'btn-primary': active === tab.key }"
+      class="label-mono relative flex h-10 items-center px-4 text-base-300 hover:text-primary"
+      :class="{ 'text-primary': active === tab.key }"
       @click="emit('change', tab.key)"
     >
       {{ tab.label }}
+      <span
+        v-if="active === tab.key"
+        class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary"
+      />
     </button>
   </div>
 </template>
