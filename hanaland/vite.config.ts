@@ -4,4 +4,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   envPrefix: ['VITE_', 'HANALAND_'],
+  resolve: {
+    tsconfigPaths: true
+  },
 })

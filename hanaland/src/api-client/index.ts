@@ -6,5 +6,3 @@ export type { User } from './types/user'
 
 import { Client, type ClientOptions } from './client'
 export { Client, type ClientOptions }
-
-export const rest = new Client()
