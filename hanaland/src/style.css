@@ -86,14 +86,14 @@ body {
   font-size: 0.6875rem;
   font-weight: 400;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-neutral);
 }
 .section-prefix::before {
   content: '';
   display: inline-block;
   width: 20px;
   height: 1px;
-  background: var(--color-accent);
+  background: var(--color-neutral);
 }
 
 /* ── Top-level heading ── */
