@@ -1,9 +1,13 @@
-import { nodes } from '../endpoints'
 import type { RequestFunction } from '../request'
 import type { Node } from '../types/node'
+import { nodes } from '../endpoints'
 
 export class NodesResource {
-  constructor(private api: RequestFunction) {}
+  private api: RequestFunction
+
+  constructor(api: RequestFunction) {
+    this.api = api
+  }
 
   list() {
     return this.api<{ nodes: Node[] }>(nodes.list)

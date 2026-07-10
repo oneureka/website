@@ -1,10 +1,14 @@
-import { notifications } from '../endpoints'
-import type { RequestFunction } from '../request'
 import type { Notification } from '../types/notification'
+import type { RequestFunction } from '../request'
 import type { PageParams } from '../types/page'
+import { notifications } from '../endpoints'
 
 export class NotificationsResource {
-  constructor(private api: RequestFunction) {}
+  private api: RequestFunction
+
+  constructor(api: RequestFunction) {
+    this.api = api
+  }
 
   list(params?: PageParams) {
     return this.api<{ notifications: Notification[] }>(notifications.list, params)

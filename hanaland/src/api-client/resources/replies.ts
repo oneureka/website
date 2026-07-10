@@ -1,10 +1,14 @@
-import { replies } from '../endpoints'
 import type { RequestFunction } from '../request'
-import type { Reply } from '../types/reply'
 import type { PageParams } from '../types/page'
+import type { Reply } from '../types/reply'
+import { replies } from '../endpoints'
 
 export class RepliesResource {
-  constructor(private api: RequestFunction) {}
+  private api: RequestFunction
+
+  constructor(api: RequestFunction) {
+    this.api = api
+  }
 
   list(params: { topic_id: number } & PageParams) {
     return this.api<{ replies: Reply[] }>(replies.list, params)

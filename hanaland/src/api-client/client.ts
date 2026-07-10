@@ -1,3 +1,4 @@
+import ky from 'ky'
 import { createRequest, type RequestFunction } from './request'
 import { TopicsResource } from './resources/topics'
 import { UsersResource } from './resources/users'
@@ -24,7 +25,7 @@ export class Client {
 
   constructor({ baseUrl, auth }: HanalandOptions = {}) {
     const base = baseUrl || import.meta.env.HANALAND_API_URL || ''
-    const ctx = createRequest(base)
+    const ctx = createRequest(ky, base)
     this.request = ctx.request
     this._setAuth = ctx.setAuth
 

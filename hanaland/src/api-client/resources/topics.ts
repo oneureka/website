@@ -1,10 +1,14 @@
-import { topics } from '../endpoints'
 import type { RequestFunction } from '../request'
-import type { Topic } from '../types/topic'
 import type { PageParams } from '../types/page'
+import type { Topic } from '../types/topic'
+import { topics } from '../endpoints'
 
 export class TopicsResource {
-  constructor(private api: RequestFunction) {}
+  private api: RequestFunction
+
+  constructor(api: RequestFunction) {
+    this.api = api
+  }
 
   list(params?: PageParams) {
     return this.api<{ topics: Topic[] }>(topics.list, params)

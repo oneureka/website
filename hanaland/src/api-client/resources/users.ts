@@ -1,12 +1,16 @@
-import { users } from '../endpoints'
 import type { RequestFunction } from '../request'
-import type { User } from '../types/user'
-import type { Topic } from '../types/topic'
-import type { Reply } from '../types/reply'
 import type { PageParams } from '../types/page'
+import type { Reply } from '../types/reply'
+import type { Topic } from '../types/topic'
+import type { User } from '../types/user'
+import { users } from '../endpoints'
 
 export class UsersResource {
-  constructor(private api: RequestFunction) {}
+  private api: RequestFunction
+
+  constructor(api: RequestFunction) {
+    this.api = api
+  }
 
   list(params?: PageParams) {
     return this.api<{ users: User[] }>(users.list, params)

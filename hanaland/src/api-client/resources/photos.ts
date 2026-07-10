@@ -1,8 +1,12 @@
-import { photos } from '../endpoints'
 import type { RequestFunction } from '../request'
+import { photos } from '../endpoints'
 
 export class PhotosResource {
-  constructor(private api: RequestFunction) {}
+  private api: RequestFunction
+
+  constructor(api: RequestFunction) {
+    this.api = api
+  }
 
   create(params: { image: File }) {
     return this.api<{ url: string }>(photos.create, { data: params })
