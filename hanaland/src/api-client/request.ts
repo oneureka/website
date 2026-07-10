@@ -1,12 +1,6 @@
 import type { KyInstance } from 'ky'
 import { compileUrl } from '../utils/compile-url'
-
-interface Route {
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE'
-  url: string
-}
-
-export type RequestFunction = <T = any>(route: Route, options?: { data?: any } & Record<string, any>) => Promise<T>
+import type { RequestFunction } from './types/api'
 
 export function createRequest(kyInstance: { create: (options?: object) => KyInstance }, baseUrl: string) {
   let auth: string | undefined
@@ -27,10 +21,7 @@ export function createRequest(kyInstance: { create: (options?: object) => KyInst
     auth = value
   }
 
-  const request: RequestFunction = async function (
-    route: Route,
-    options: { data?: any } & Record<string, any> = {},
-  ): Promise<any> {
+  const request: RequestFunction = async function (route, options = {}) {
     const { method, url: urlTemplate } = route
     const { data, ...rest } = options
     const { url: resolvedUrl, query } = compileUrl(urlTemplate, rest)
@@ -49,7 +40,7 @@ export function createRequest(kyInstance: { create: (options?: object) => KyInst
     const response = await api(resolvedUrl, requestOptions)
 
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`)
+      throw new Error(`HTTP ${response.status} ${response.statusText}`)
     }
 
     if (response.status === 204) return null

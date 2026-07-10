@@ -1,5 +1,5 @@
 import type { RequestFunction } from '../request'
-import type { PageParams } from '../types/page'
+import type { PageParams } from '../types/api'
 import type { Reply } from '../types/reply'
 import { replies } from '../endpoints'
 

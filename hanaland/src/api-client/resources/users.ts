@@ -1,5 +1,5 @@
 import type { RequestFunction } from '../request'
-import type { PageParams } from '../types/page'
+import type { PageParams } from '../types/api'
 import type { Reply } from '../types/reply'
 import type { Topic } from '../types/topic'
 import type { User } from '../types/user'

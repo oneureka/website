@@ -1,6 +1,6 @@
 import type { Notification } from '../types/notification'
 import type { RequestFunction } from '../request'
-import type { PageParams } from '../types/page'
+import type { PageParams } from '../types/api'
 import { notifications } from '../endpoints'
 
 export class NotificationsResource {
