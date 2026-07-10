@@ -28,7 +28,7 @@ const tabs = [
       {{ tab.label }}
       <span
         v-if="active === tab.key"
-        class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary"
+        class="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral"
       />
     </button>
   </div>

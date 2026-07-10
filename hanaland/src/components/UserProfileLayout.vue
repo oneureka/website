@@ -59,7 +59,7 @@ function toggleFollow() {
             :class="{ 'text-neutral': route.fullPath === tab.to }"
           >
             {{ tab.label }}
-            <span v-if="route.fullPath === tab.to" class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
+            <span v-if="route.fullPath === tab.to" class="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral" />
           </RouterLink>
         </div>
         <slot />

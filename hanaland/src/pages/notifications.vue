@@ -112,7 +112,7 @@ function typeLabel(type: string) {
           @click="activeTab = 'all'"
         >
           全部
-          <span v-if="activeTab === 'all'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
+          <span v-if="activeTab === 'all'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral" />
         </button>
         <button
           class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-neutral"
@@ -120,7 +120,7 @@ function typeLabel(type: string) {
           @click="activeTab = 'unread'"
         >
           未读
-          <span v-if="activeTab === 'unread'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
+          <span v-if="activeTab === 'unread'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral" />
         </button>
         <button
           class="label-mono relative flex h-9 items-center px-4 text-xs text-base-300 hover:text-neutral"
@@ -128,7 +128,7 @@ function typeLabel(type: string) {
           @click="activeTab = 'read'"
         >
           已读
-          <span v-if="activeTab === 'read'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
+          <span v-if="activeTab === 'read'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral" />
         </button>
       </div>
 
