@@ -133,7 +133,7 @@ function toggleFollow(userId: number, followed: boolean) {
 
             <div
               v-if="topic?.body_html"
-              class="prose prose-sm max-w-none"
+              class="prose prose-sm max-w-none overflow-x-auto [&_img]:max-w-full"
               v-html="topic?.body_html"
             />
 
@@ -218,7 +218,7 @@ function toggleFollow(userId: number, followed: boolean) {
                   </div>
                   <div
                     v-if="reply?.body_html"
-                    class="prose prose-sm max-w-none"
+                    class="prose prose-sm max-w-none overflow-x-auto [&_img]:max-w-full"
                     v-html="reply?.body_html"
                   />
                   <div v-else class="text-sm text-base-content">{{ reply?.body }}</div>

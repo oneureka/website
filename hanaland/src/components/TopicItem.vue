@@ -18,16 +18,16 @@ defineProps<{
       >
         {{ topic.title }}
       </RouterLink>
-      <div class="space-x-2 text-sm text-base-300">
+      <div class="flex flex-wrap items-baseline gap-x-2 text-sm text-base-300">
         <RouterLink
           :to="`/${topic.user.login}`"
-          class="text-base-300 no-underline hover:underline"
+          class="shrink-0 text-base-300 no-underline hover:underline"
         >
           {{ topic.user.name }}
         </RouterLink>
-        <span>&middot; 发布于 {{ topic.created_at }}</span>
+        <span class="truncate">发布于 {{ topic.created_at }}</span>
         <template v-if="topic.replied_at">
-          <span>&middot; 最后由
+          <span class="truncate">最后由
             <RouterLink
               :to="`/${topic.last_reply_user_login}`"
               class="text-base-300 no-underline hover:underline"

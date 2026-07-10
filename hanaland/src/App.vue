@@ -8,7 +8,7 @@ import ScrollToTop from './components/ScrollToTop.vue'
 <template>
   <AppShell>
     <AppHeader />
-    <main class="mx-auto w-full max-w-5xl flex-1 px-2 pt-5">
+    <main class="mx-auto w-full max-w-5xl flex-1 px-4 pt-5 md:px-2">
       <RouterView />
     </main>
     <AppFooter />

@@ -28,11 +28,6 @@ const router = createRouter({
       component: () => import('@pages/notifications.vue'),
     },
     {
-      path: '/top100',
-      name: 'top100',
-      component: () => import('@pages/top100.vue'),
-    },
-    {
       path: '/:login',
       component: () => import('@pages/user/home.vue'),
     },
