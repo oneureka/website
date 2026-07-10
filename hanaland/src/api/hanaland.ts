@@ -1,30 +1,10 @@
 import { createRequest, type RequestFunction } from './request'
-import topicsEndpoints from './endpoints/topics'
-import usersEndpoints from './endpoints/users'
-import nodesEndpoints from './endpoints/nodes'
-import repliesEndpoints from './endpoints/replies'
-import photosEndpoints from './endpoints/photos'
-import notificationsEndpoints from './endpoints/notifications'
-
-type EndpointDef = {
-  id: string
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE'
-  url: string
-}
-
-type EndpointsArray = readonly EndpointDef[]
-
-function buildMethods(endpoints: EndpointsArray, request: RequestFunction) {
-  const methods: Record<string, Function> = {}
-
-  for (const { id, method, url } of endpoints) {
-    methods[id] = async function (options: Record<string, any> = {}) {
-      return request(`${method} ${url}`, options)
-    }
-  }
-
-  return methods
-}
+import { TopicsResource } from './resources/topics'
+import { UsersResource } from './resources/users'
+import { NodesResource } from './resources/nodes'
+import { RepliesResource } from './resources/replies'
+import { PhotosResource } from './resources/photos'
+import { NotificationsResource } from './resources/notifications'
 
 export type HanalandOptions = {
   baseUrl?: string
@@ -33,35 +13,36 @@ export type HanalandOptions = {
 
 export class Hanaland {
   request: RequestFunction
-  topics: ReturnType<typeof buildMethods>
-  users: ReturnType<typeof buildMethods>
-  nodes: ReturnType<typeof buildMethods>
-  replies: ReturnType<typeof buildMethods>
-  photos: ReturnType<typeof buildMethods>
-  notifications: ReturnType<typeof buildMethods>
+  topics: TopicsResource
+  users: UsersResource
+  nodes: NodesResource
+  replies: RepliesResource
+  photos: PhotosResource
+  notifications: NotificationsResource
 
-  private _ctx: { setAuth: (value: string | undefined) => void; request: RequestFunction }
+  private _setAuth: (value?: string) => void
 
   constructor({ baseUrl, auth }: HanalandOptions = {}) {
     const base = baseUrl || import.meta.env.HANALAND_API_URL || ''
-    this._ctx = createRequest(base)
-    this.request = this._ctx.request
-    if (auth) {
-      this._ctx.setAuth(auth)
-    }
-    this.topics = buildMethods(topicsEndpoints, this.request)
-    this.users = buildMethods(usersEndpoints, this.request)
-    this.nodes = buildMethods(nodesEndpoints, this.request)
-    this.replies = buildMethods(repliesEndpoints, this.request)
-    this.photos = buildMethods(photosEndpoints, this.request)
-    this.notifications = buildMethods(notificationsEndpoints, this.request)
+    const ctx = createRequest(base)
+    this.request = ctx.request
+    this._setAuth = ctx.setAuth
+
+    this.topics = new TopicsResource(this.request)
+    this.users = new UsersResource(this.request)
+    this.nodes = new NodesResource(this.request)
+    this.replies = new RepliesResource(this.request)
+    this.photos = new PhotosResource(this.request)
+    this.notifications = new NotificationsResource(this.request)
+
+    if (auth) ctx.setAuth(auth)
   }
 
   setToken(value: string) {
-    this._ctx.setAuth(value)
+    this._setAuth(value)
   }
 
   revokeToken() {
-    this._ctx.setAuth(undefined)
+    this._setAuth(undefined)
   }
 }

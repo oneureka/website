@@ -33,7 +33,12 @@ type RequestOptions = {
   [key: string]: any
 }
 
-export type RequestFunction = (route: string, options?: RequestOptions) => Promise<any>
+type Route = {
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE'
+  url: string
+}
+
+export type RequestFunction = <T = any>(route: Route, options?: RequestOptions) => Promise<T>
 
 export function createRequest(baseUrl: string) {
   const api = ky.create({
@@ -48,12 +53,10 @@ export function createRequest(baseUrl: string) {
   }
 
   const request: RequestFunction = async function (
-    route: string,
+    route: Route,
     options: RequestOptions = {},
   ): Promise<any> {
-    const sep = route.indexOf(' ')
-    const method = route.slice(0, sep) as 'GET' | 'POST' | 'PUT' | 'DELETE'
-    const urlTemplate = route.slice(sep + 1)
+    const { method, url: urlTemplate } = route
 
     const { data, headers, signal, ...rest } = options
     const { url: resolvedUrl, query } = interpolate(urlTemplate, rest)
