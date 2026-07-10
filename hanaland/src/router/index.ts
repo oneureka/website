@@ -18,9 +18,9 @@ const router = createRouter({
     },
     { path: '/login', name: 'login', component: () => import('@pages/login.vue') },
     {
-      path: '/explore',
+      path: '/nodes',
       name: 'explore',
-      component: () => import('@pages/explore.vue'),
+      component: () => import('@pages/nodes.vue'),
     },
     {
       path: '/notifications',
