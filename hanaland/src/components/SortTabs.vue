@@ -17,7 +17,7 @@ const tabs = [
 </script>
 
 <template>
-  <div class="flex items-center gap-0 overflow-x-auto border-b border-secondary/40">
+  <div class="flex items-center gap-0 overflow-x-auto border-b border-neutral/30">
     <button
       v-for="tab in tabs"
       :key="tab.key"

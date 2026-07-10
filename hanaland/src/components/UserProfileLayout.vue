@@ -50,7 +50,7 @@ function toggleFollow() {
   <div class="relative mx-auto flex w-full max-w-5xl flex-col md:flex-row">
     <div class="min-w-0 border-dashed-accent md:w-3/4 md:border-r">
       <Card class="!rounded-none !border-0">
-        <div class="flex gap-0 border-b border-secondary/40">
+        <div class="flex gap-0 border-b border-neutral/30">
           <RouterLink
             v-for="tab in tabs"
             :key="tab.to"
