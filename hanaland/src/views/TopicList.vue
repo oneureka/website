@@ -2,12 +2,29 @@
 import { ref, onMounted } from 'vue'
 import type { Topic } from '@api-client'
 import { rest } from '@js-sdk'
+import AppLayout from '../components/AppLayout.vue'
+import Card from '../components/Card.vue'
+import SortTabs from '../components/SortTabs.vue'
+import TopicItem from '../components/TopicItem.vue'
+import Pagination from '../components/Pagination.vue'
+import Loader from '../components/Loader.vue'
+import EmptyState from '../components/EmptyState.vue'
+import NodeSidebar from '../components/NodeSidebar.vue'
 
 const topics = ref<Topic[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
+const activeType = ref('last_actived')
+const page = ref(1)
+const pageCount = ref(1)
+const activeNodeId = ref<number>()
 
 onMounted(async () => {
+  await fetchTopics()
+})
+
+async function fetchTopics() {
+  loading.value = true
   try {
     const res = await rest.topics.list({ limit: 20, offset: 0 })
     topics.value = res.topics ?? res
@@ -16,159 +33,40 @@ onMounted(async () => {
   } finally {
     loading.value = false
   }
-})
+}
+
+function onTypeChange(type: string) {
+  activeType.value = type
+  page.value = 1
+  fetchTopics()
+}
 </script>
 
 <template>
-  <div class="layout">
-    <div class="main-col">
-      <div class="card">
-        <div v-if="loading" class="state-box">加载中...</div>
-        <div v-else-if="error" class="state-box">{{ error }}</div>
-        <div v-else-if="topics.length === 0" class="state-box">暂无话题</div>
-        <ul v-else class="topic-list">
-          <li v-for="topic in topics" :key="topic.id" class="topic-item">
-            <RouterLink :to="`/topics/${topic.id}`" class="topic-main">
-              <img
-                :src="topic.user.avatar_url"
-                :alt="topic.user.login"
-                class="avatar"
-              />
-              <div class="topic-body">
-                <h3 class="topic-title">{{ topic.title }}</h3>
-                <p class="topic-meta">
-                  {{ topic.user.name }}
-                  <span class="dot">&middot;</span>
-                  {{ new Date(topic.created_at).toLocaleDateString() }}
-                </p>
-              </div>
-            </RouterLink>
-            <div class="reply-count">{{ topic.replies_count }}</div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <aside class="side-col">
-      <div class="card">
-        <div class="side-header">热门标签</div>
-      </div>
-    </aside>
-  </div>
+  <AppLayout>
+    <template #main>
+      <Card>
+        <SortTabs :active="activeType" @change="onTypeChange" />
+        <Loader v-if="loading" />
+        <EmptyState v-else-if="error" :message="error" />
+        <EmptyState v-else-if="topics.length === 0" />
+        <template v-else>
+          <TopicItem v-for="topic in topics" :key="topic.id" :topic="topic" />
+          <Pagination
+            v-if="pageCount > 1"
+            :page="page"
+            :page-count="pageCount"
+            @change="page = $event"
+          />
+        </template>
+      </Card>
+    </template>
+    <template #sidebar>
+      <NodeSidebar
+        :nodes="[]"
+        :active-node-id="activeNodeId"
+        @select="activeNodeId = $event"
+      />
+    </template>
+  </AppLayout>
 </template>
-
-<style scoped>
-.layout {
-  display: flex;
-  flex-direction: column;
-  padding: 0 0.5rem;
-}
-
-@media (min-width: 768px) {
-  .layout {
-    flex-direction: row;
-  }
-  .main-col {
-    width: 75%;
-  }
-  .side-col {
-    width: 25%;
-    padding-left: 1rem;
-  }
-}
-
-.card {
-  background: #fff;
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-
-.state-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 16rem;
-  color: #a1a1aa;
-  font-size: 0.875rem;
-}
-
-.topic-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.topic-item {
-  display: flex;
-  align-items: center;
-  padding: 0 0.75rem;
-  border-bottom: 1px solid #e4e4e7;
-}
-
-.topic-item:last-child {
-  border-bottom: none;
-}
-
-.topic-main {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  text-decoration: none;
-  padding: 0.75rem 0;
-}
-
-.avatar {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.topic-body {
-  flex: 1;
-  min-width: 0;
-}
-
-.topic-title {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: #1d4ed8;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
-}
-
-.topic-title:hover {
-  text-decoration: underline;
-}
-
-.topic-meta {
-  font-size: 0.8125rem;
-  color: #71717a;
-  margin: 0.25rem 0 0;
-}
-
-.dot {
-  margin: 0 0.25rem;
-}
-
-.reply-count {
-  width: 3rem;
-  text-align: center;
-  font-size: 0.8125rem;
-  color: #71717a;
-}
-
-.side-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 3.5rem;
-  padding: 0 0.75rem;
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: #18181b;
-  border-bottom: 1px solid #e4e4e7;
-}
-</style>

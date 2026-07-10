@@ -1,13 +1,7 @@
 @import "tailwindcss";
-@plugin "daisyui";
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@plugin "daisyui" {
+  themes: autumn --default;
+};
 
 body {
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;

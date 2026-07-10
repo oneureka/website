@@ -19,7 +19,7 @@ const emit = defineEmits<{
       上一页
     </button>
 
-    <span class="text-sm text-zinc-500">{{ page }} / {{ pageCount }}</span>
+    <span class="text-sm text-base-300">{{ page }} / {{ pageCount }}</span>
 
     <button
       class="btn btn-ghost btn-sm"

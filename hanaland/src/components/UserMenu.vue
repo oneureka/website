@@ -8,17 +8,17 @@ const ui = useUIStore()
 
 <template>
   <div v-if="auth.isAuthenticated" class="dropdown dropdown-end">
-    <button class="btn btn-ghost h-14 px-3 font-bold text-zinc-400 hover:text-zinc-100">
+    <button class="btn btn-ghost h-14 px-3 font-bold text-neutral-content/70 hover:text-neutral-content">
       {{ auth.user?.name ?? auth.user?.login }}
       <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
       </svg>
     </button>
-    <ul class="dropdown-content menu rounded-box z-10 w-44 bg-slate-900 p-2 shadow-lg">
+    <ul class="dropdown-content menu rounded-box z-10 w-44 bg-neutral p-2 shadow-lg">
       <li>
         <RouterLink
           :to="`/${auth.user?.login}`"
-          class="text-zinc-400 hover:text-zinc-100"
+          class="text-neutral-content/70 hover:text-neutral-content"
         >
           个人资料
         </RouterLink>
@@ -26,7 +26,7 @@ const ui = useUIStore()
       <li>
         <a
           href="#"
-          class="text-zinc-400 hover:text-zinc-100"
+          class="text-neutral-content/70 hover:text-neutral-content"
           @click.prevent="auth.logout"
         >
           登出
@@ -37,7 +37,7 @@ const ui = useUIStore()
 
   <button
     v-else
-    class="btn btn-ghost h-14 px-3 font-bold text-zinc-400 hover:text-zinc-100"
+    class="btn btn-ghost h-14 px-3 font-bold text-neutral-content/70 hover:text-neutral-content"
     @click="ui.openLoginModal"
   >
     登录

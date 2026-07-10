@@ -14,14 +14,14 @@ defineProps<{
     <div class="flex min-w-0 flex-1 flex-col gap-1">
       <RouterLink
         :to="`/topics/${topic.id}`"
-        class="truncate text-blue-700 no-underline hover:underline"
+        class="truncate text-primary no-underline hover:underline"
       >
         {{ topic.title }}
       </RouterLink>
-      <div class="space-x-2 text-sm text-zinc-500">
+      <div class="space-x-2 text-sm text-base-300">
         <RouterLink
           :to="`/${topic.user.login}`"
-          class="text-zinc-500 no-underline hover:underline"
+          class="text-base-300 no-underline hover:underline"
         >
           {{ topic.user.name }}
         </RouterLink>
@@ -30,7 +30,7 @@ defineProps<{
           <span>&middot; 最后由
             <RouterLink
               :to="`/${topic.last_reply_user_login}`"
-              class="text-zinc-500 no-underline hover:underline"
+              class="text-base-300 no-underline hover:underline"
             >
               {{ topic.last_reply_user_login }}
             </RouterLink>

@@ -13,12 +13,12 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="divide-y rounded-box bg-white shadow-sm">
+  <div class="divide-y rounded-box bg-base-100 shadow-sm">
     <div class="flex h-14 items-center justify-between p-3 font-medium">
       <span>热门标签</span>
       <button
         v-if="activeNodeId"
-        class="text-red-600 hover:text-red-700"
+        class="text-error hover:text-error/80"
         @click="emit('select', undefined)"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
