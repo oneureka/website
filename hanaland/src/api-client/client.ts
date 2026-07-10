@@ -1,11 +1,13 @@
+import { type RequestFunction } from './types/api'
+import { createRequest } from './request'
+import ky from 'ky'
+
 import { NodesResource } from './resources/nodes'
 import { NotificationsResource } from './resources/notifications'
 import { PhotosResource } from './resources/photos'
 import { RepliesResource } from './resources/replies'
 import { TopicsResource } from './resources/topics'
 import { UsersResource } from './resources/users'
-import { createRequest, type RequestFunction } from './request'
-import ky from 'ky'
 
 export interface ClientOptions {
   baseUrl?: string
@@ -14,12 +16,12 @@ export interface ClientOptions {
 
 export class Client {
   readonly request: RequestFunction
+  readonly nodes: NodesResource
+  readonly notifications: NotificationsResource
+  readonly photos: PhotosResource
+  readonly replies: RepliesResource
   readonly topics: TopicsResource
   readonly users: UsersResource
-  readonly nodes: NodesResource
-  readonly replies: RepliesResource
-  readonly photos: PhotosResource
-  readonly notifications: NotificationsResource
 
   private readonly _setAuth: (value?: string) => void
 

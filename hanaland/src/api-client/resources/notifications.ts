@@ -1,5 +1,5 @@
 import type { Notification } from '../types/notification'
-import type { RequestFunction } from '../request'
+import type { RequestFunction } from '../types/api'
 import type { PageParams } from '../types/api'
 import { notifications } from '../endpoints'
 
@@ -14,7 +14,7 @@ export class NotificationsResource {
     return this.api<{ notifications: Notification[] }>(notifications.list, params)
   }
 
-  markAsRead(params?: { ids?: number[] }) {
+  markAsRead(params: { ids?: number[] }) {
     return this.api<void>(notifications.markAsRead, { data: params })
   }
 

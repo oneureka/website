@@ -1,4 +1,4 @@
-import type { RequestFunction } from '../request'
+import type { RequestFunction } from '../types/api'
 import type { Node } from '../types/node'
 import { nodes } from '../endpoints'
 

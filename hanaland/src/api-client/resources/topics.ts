@@ -1,4 +1,4 @@
-import type { RequestFunction } from '../request'
+import type { RequestFunction } from '../types/api'
 import type { PageParams } from '../types/api'
 import type { Topic } from '../types/topic'
 import { topics } from '../endpoints'

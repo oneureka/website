@@ -2,7 +2,7 @@ import type { KyInstance } from 'ky'
 import type { RequestFunction } from './types/api'
 import { compileUrl } from '../utils/compile-url'
 
-export function createRequest(kyInstance: { create: (options?: object) => KyInstance }, baseUrl: string) {
+export function createRequest(kyInstance: KyInstance, baseUrl: string) {
   let auth: string | undefined
 
   function injectAuth({ request }: { request: Request }): Request | void {
@@ -12,10 +12,17 @@ export function createRequest(kyInstance: { create: (options?: object) => KyInst
     return new Request(url, request)
   }
 
-  const api = kyInstance.create({
-    prefix: baseUrl,
+  const kyOptions: Record<string, any> = {
     hooks: { beforeRequest: [injectAuth] },
-  })
+  }
+
+  if (baseUrl) {
+    const parsed = new URL(baseUrl)
+    kyOptions.baseUrl = parsed.origin
+    kyOptions.prefix = parsed.pathname.replace(/\/+$/, '')
+  }
+
+  const api = kyInstance.create(kyOptions)
 
   function setAuth(value: string | undefined) {
     auth = value
@@ -38,10 +45,6 @@ export function createRequest(kyInstance: { create: (options?: object) => KyInst
     }
 
     const response = await api(resolvedUrl, requestOptions)
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status} ${response.statusText}`)
-    }
 
     if (response.status === 204) return null
     return response.json()

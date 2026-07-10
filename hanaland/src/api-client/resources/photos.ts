@@ -1,4 +1,4 @@
-import type { RequestFunction } from '../request'
+import type { RequestFunction } from '../types/api'
 import { photos } from '../endpoints'
 
 export class PhotosResource {
@@ -9,6 +9,8 @@ export class PhotosResource {
   }
 
   create(params: { image: File }) {
-    return this.api<{ url: string }>(photos.create, { data: params })
+    const formData = new FormData()
+    formData.append('image', params.image)
+    return this.api<{ url: string }>(photos.create, { data: formData })
   }
 }
