@@ -1,6 +1,6 @@
 import type { User } from './user'
 
-export type Topic = {
+export interface Topic {
   id: number
   title: string
   body: string

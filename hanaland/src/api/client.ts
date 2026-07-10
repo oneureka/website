@@ -6,12 +6,12 @@ import { RepliesResource } from './resources/replies'
 import { PhotosResource } from './resources/photos'
 import { NotificationsResource } from './resources/notifications'
 
-export type HanalandOptions = {
+export interface HanalandOptions {
   baseUrl?: string
   auth?: string
 }
 
-export class Hanaland {
+export class Client {
   request: RequestFunction
   topics: TopicsResource
   users: UsersResource

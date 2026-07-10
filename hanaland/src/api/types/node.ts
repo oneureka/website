@@ -1,4 +1,4 @@
-export type Node = {
+export interface Node {
   id: number
   name: string
   summary: string

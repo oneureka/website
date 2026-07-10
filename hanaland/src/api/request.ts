@@ -26,14 +26,14 @@ function interpolate(template: string, params: Record<string, any>): { url: stri
   return { url, query }
 }
 
-type RequestOptions = {
+interface RequestOptions {
   data?: any
   headers?: Record<string, string>
   signal?: AbortSignal
   [key: string]: any
 }
 
-type Route = {
+interface Route {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE'
   url: string
 }
